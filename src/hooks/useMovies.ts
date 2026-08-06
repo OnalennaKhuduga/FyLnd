@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "../services/api-client";
+import APIClient, { FetchResponse } from "../services/api-client";
 
 interface Movie {
   backdrop_path: string;
@@ -13,16 +13,12 @@ interface Movie {
   vote_average: number;
 }
 
-interface FetchResponse {
-  page: number;
-  results: Movie[];
-}
+const apiClient = new APIClient<FetchResponse<Movie>>("/discover/movie");
 
 const useMovies = () =>
   useQuery({
     queryKey: ["movie"],
-    queryFn: () =>
-      apiClient.get<FetchResponse>("/discover/movie").then((res) => res.data),
+    queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000, // 24h
   });
 
