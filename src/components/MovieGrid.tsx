@@ -1,11 +1,12 @@
-import { SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Box, HStack, SimpleGrid, Spinner } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
+import MovieCardSkeleton from "./MovieCardSkeleton";
 
 const MovieGrid = () => {
   const { data, isLoading, error } = useMovies();
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
-  if (isLoading) return <Spinner />;
   if (error) return null;
 
   return (
@@ -14,6 +15,12 @@ const MovieGrid = () => {
       padding={2}
       spacing={8}
     >
+      {isLoading &&
+        skeletons.map((skel) => (
+          <HStack spacing={2} key={skel}>
+            <MovieCardSkeleton />
+          </HStack>
+        ))}
       {data?.results.map((m) => (
         <MovieCard key={m.id} movie={m} />
       ))}
