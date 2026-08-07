@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "../services/api-client";
 
-interface Movie {
+export interface Movie {
   backdrop_path: string;
   genre_ids: number[];
   id: number;
