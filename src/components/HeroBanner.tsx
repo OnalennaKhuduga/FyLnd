@@ -6,22 +6,22 @@ import {
   Heading,
   HStack,
   Show,
-  Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import genres from "../data/genres";
 import useMovies from "../hooks/useMovies";
 import formatDate from "../utils/formatDate";
+import getImage from "../utils/getImage";
 import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
+import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
-import getImage from "../utils/getImage";
 
 const HeroBanner = () => {
   const { data, isLoading, error } = useMovies();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <HeroBannerSkeleton />;
   if (error) return null;
 
   const currentMovie = data?.results[0];

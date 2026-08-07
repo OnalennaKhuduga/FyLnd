@@ -1,4 +1,4 @@
-import { Box, HStack, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { HStack, SimpleGrid } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
