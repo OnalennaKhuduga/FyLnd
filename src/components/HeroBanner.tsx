@@ -16,6 +16,7 @@ import formatDate from "../utils/formatDate";
 import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
 import MetadataList from "./MetadataList";
+import getImage from "../utils/getImage";
 
 const HeroBanner = () => {
   const { data, isLoading, error } = useMovies();
@@ -45,16 +46,12 @@ const HeroBanner = () => {
 
   const summarizedOverview = summarizeText(overview, 90);
 
-  const imageEndpoint = (endpoint: string): string => {
-    return `https://image.tmdb.org/t/p/original/${endpoint}`;
-  };
-
   return (
     <AspectRatio
       ratio={{ base: 9 / 16, md: 16 / 9 }}
       bgImage={{
-        base: imageEndpoint(poster_path),
-        md: imageEndpoint(backdrop_path),
+        base: getImage(poster_path),
+        md: getImage(backdrop_path),
       }}
       bgPosition="center"
       bgSize="cover"

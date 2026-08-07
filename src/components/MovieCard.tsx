@@ -11,6 +11,7 @@ import React from "react";
 import genres from "../data/genres";
 import { Movie } from "../hooks/useMovies";
 import CriticScore from "./CriticScore";
+import getImage from "../utils/getImage";
 
 interface Props {
   movie: Movie;
@@ -19,10 +20,7 @@ interface Props {
 const MovieCard = ({ movie }: Props) => {
   return (
     <Card position="relative">
-      <Image
-        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-        borderRadius={5}
-      />
+      <Image src={getImage(movie.poster_path)} borderRadius={5} />
 
       <Box
         position="absolute"
