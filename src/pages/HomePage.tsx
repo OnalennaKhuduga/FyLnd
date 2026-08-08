@@ -1,9 +1,10 @@
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import BannerContainer from "../components/BannerContainer";
 import MovieContainer from "../components/MovieContainer";
 import MovieGrid from "../components/MovieGrid";
 import SideBar from "../components/SideBar";
 import { useState } from "react";
+import NavBar from "../components/NavBar";
 
 const HomePage = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -11,6 +12,7 @@ const HomePage = () => {
   return (
     <Grid
       templateAreas={{
+        base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`,
       }}
       templateColumns={{
@@ -22,15 +24,19 @@ const HomePage = () => {
       }}
       h="100vh"
     >
-      <GridItem area="nav">Nav</GridItem>
-      <GridItem area="aside">
-        <Box h="100%" overflowY="auto">
-          <SideBar
-            isOpen={sidebarCollapsed}
-            onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
-          />
-        </Box>
+      <GridItem area="nav">
+        <NavBar />
       </GridItem>
+      <Show above="lg">
+        <GridItem area="aside">
+          <Box h="100%" overflowY="auto">
+            <SideBar
+              isOpen={sidebarCollapsed}
+              onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
+            />
+          </Box>
+        </GridItem>
+      </Show>
       <GridItem area="main" minH={0} overflowY="auto">
         <MovieContainer>
           <BannerContainer />
