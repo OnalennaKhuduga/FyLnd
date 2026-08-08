@@ -6,12 +6,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
+import theme from "./theme";
 
 const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <QueryClientProvider client={client}>
         <RouterProvider router={router} />
         <ReactQueryDevtools />
