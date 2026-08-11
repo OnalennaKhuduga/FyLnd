@@ -5,6 +5,7 @@ import {
   Button,
   Heading,
   HStack,
+  Icon,
   Show,
   Text,
   VStack,
@@ -18,6 +19,7 @@ import CriticScore from "./CriticScore";
 import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
 import getMovies from "../services/movie-service";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const HeroBanner = () => {
   const topRatedEndpoint = getMovies("top_rated");
@@ -48,6 +50,22 @@ const HeroBanner = () => {
 
   const summarizedOverview = summarizeText(overview, 90);
 
+  const navigationButtons = [
+    {
+      side: "left",
+      icon: MdKeyboardArrowLeft,
+      action: null,
+    },
+    {
+      side: "right",
+      icon: MdKeyboardArrowRight,
+      action: null,
+    },
+  ];
+
+  const navDots = [1, 2, 3, 4, 5];
+  const displayedMovie = 3;
+
   return (
     <AspectRatio
       ratio={{ base: 9 / 16, md: 16 / 9 }}
@@ -72,6 +90,34 @@ const HeroBanner = () => {
           zIndex="1"
         />
 
+        {/* Navigation buttons */}
+        {navigationButtons.map(({ side, icon, action }, index) => (
+          <Box
+            key={index}
+            position="absolute"
+            top="0"
+            {...(side === "left" ? { left: "0" } : { right: "0" })} // Set the position of the button in banner
+            h="90%"
+            w="9%"
+            zIndex="3"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            opacity="0"
+            _hover={{ opacity: "1" }}
+            transition="opacity 0.125s ease"
+          >
+            <Button variant="unstyled">
+              <Icon
+                fontSize="3xl"
+                _hover={{ fontSize: "4xl" }}
+                transition="font-size 0.15s ease"
+                as={icon}
+              />
+            </Button>
+          </Box>
+        ))}
+
         {/* Content */}
         <Show above="sm">
           <VStack
@@ -81,7 +127,7 @@ const HeroBanner = () => {
             w="100%"
             h="100%"
             align="flex-start"
-            padding={6}
+            padding={8}
             justifyContent="space-between"
             zIndex="2"
           >
@@ -116,6 +162,24 @@ const HeroBanner = () => {
             </VStack>
           </VStack>
         </Show>
+
+        {/* Nav Dots */}
+        <Box
+          position="absolute"
+          bottom="0"
+          left="0"
+          width="100%"
+          height="25px"
+          display="flex"
+          justifyContent="center"
+          zIndex="3"
+        >
+          {navDots.map((dot) => (
+            <Text key={dot} marginX={"3px"} fontSize="xs">
+              {displayedMovie === dot ? "●" : "◇"}
+            </Text>
+          ))}
+        </Box>
       </Box>
     </AspectRatio>
   );
