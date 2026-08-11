@@ -2,9 +2,11 @@ import { HStack, SimpleGrid } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
+import getMovies from "../services/movie-service";
 
 const MovieGrid = () => {
-  const { data, isLoading, error } = useMovies();
+  const discoverEndpoint = getMovies("discover");
+  const { data, isLoading, error } = useMovies(discoverEndpoint);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   if (error) return null;

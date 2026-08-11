@@ -13,13 +13,14 @@ export interface Movie {
   vote_average: number;
 }
 
-const apiClient = new APIClient<FetchResponse<Movie>>("/discover/movie");
+const useMovies = (endpoint: string) => {
+  const apiClient = new APIClient<FetchResponse<Movie>>(endpoint);
 
-const useMovies = () =>
-  useQuery({
-    queryKey: ["movie"],
+  return useQuery({
+    queryKey: ["movie", endpoint],
     queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000, // 24h
   });
+};
 
 export default useMovies;

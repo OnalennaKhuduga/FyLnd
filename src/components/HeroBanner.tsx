@@ -17,9 +17,11 @@ import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
 import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
+import getMovies from "../services/movie-service";
 
 const HeroBanner = () => {
-  const { data, isLoading, error } = useMovies();
+  const topRatedEndpoint = getMovies("top_rated");
+  const { data, isLoading, error } = useMovies(topRatedEndpoint);
 
   if (isLoading) return <HeroBannerSkeleton />;
   if (error) return null;
