@@ -5,6 +5,7 @@ const token = import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN;
 export interface FetchResponse<T> {
   page: number;
   results: T[];
+  total_pages: number;
 }
 
 const axiosInstance = axios.create({

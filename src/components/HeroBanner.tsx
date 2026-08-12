@@ -30,7 +30,7 @@ const HeroBanner = () => {
   if (isLoading) return <HeroBannerSkeleton />;
   if (error) return null;
 
-  const currentMovie = data?.results.slice(0, 5) ?? [];
+  const currentMovie = data?.pages[0].results.slice(0, 5) ?? [];
   const {
     title,
     overview,
