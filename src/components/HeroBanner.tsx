@@ -20,15 +20,17 @@ import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
 import getMovies from "../services/movie-service";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { useState } from "react";
 
 const HeroBanner = () => {
   const topRatedEndpoint = getMovies("top_rated");
   const { data, isLoading, error } = useMovies(topRatedEndpoint);
+  const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
 
   if (isLoading) return <HeroBannerSkeleton />;
   if (error) return null;
 
-  const currentMovie = data?.results[0];
+  const currentMovie = data?.results.slice(0, 5) ?? [];
   const {
     title,
     overview,
@@ -38,7 +40,7 @@ const HeroBanner = () => {
     genre_ids,
     backdrop_path,
     poster_path,
-  } = currentMovie!;
+  } = currentMovie![currentMovieIndex];
 
   const formattedReleaseDate = formatDate(new Date(release_date));
 
@@ -50,34 +52,45 @@ const HeroBanner = () => {
 
   const summarizedOverview = summarizeText(overview, 90);
 
+  // Handles swiping through movies
+  const navDots = [0, 1, 2, 3, 4];
+  const movieLimit = 4;
+
   const navigationButtons = [
     {
       side: "left",
       icon: MdKeyboardArrowLeft,
-      action: null,
+      action: () =>
+        setCurrentMovieIndex(
+          currentMovieIndex === 0 ? movieLimit : currentMovieIndex - 1,
+        ),
     },
     {
       side: "right",
       icon: MdKeyboardArrowRight,
-      action: null,
+      action: () =>
+        setCurrentMovieIndex(
+          currentMovieIndex === movieLimit ? 0 : currentMovieIndex + 1,
+        ),
     },
   ];
 
-  const navDots = [1, 2, 3, 4, 5];
-  const displayedMovie = 3;
-
   return (
-    <AspectRatio
-      ratio={{ base: 9 / 16, md: 16 / 9 }}
-      bgImage={{
-        base: getImage(poster_path),
-        md: getImage(backdrop_path),
-      }}
-      bgPosition="center"
-      bgSize="cover"
-      borderRadius={{ base: 7, md: 20 }}
-    >
+    <AspectRatio ratio={{ base: 9 / 16, md: 16 / 9 }}>
       <Box display="inline-block" position="relative">
+        <Box
+          position="absolute"
+          inset="0"
+          bgImage={{
+            base: getImage(poster_path),
+            md: getImage(backdrop_path),
+          }}
+          bgPosition="center"
+          bgSize="cover"
+          borderRadius={{ base: 7, md: 20 }}
+          transition="opacity 0.4s ease-in-out"
+        />
+
         {/* Dark Layer Overlay */}
         <Box
           position="absolute"
@@ -107,7 +120,7 @@ const HeroBanner = () => {
             _hover={{ opacity: "1" }}
             transition="opacity 0.125s ease"
           >
-            <Button variant="unstyled">
+            <Button variant="unstyled" onClick={action}>
               <Icon
                 fontSize="3xl"
                 _hover={{ fontSize: "4xl" }}
@@ -176,7 +189,7 @@ const HeroBanner = () => {
         >
           {navDots.map((dot) => (
             <Text key={dot} marginX={"3px"} fontSize="xs">
-              {displayedMovie === dot ? "●" : "◇"}
+              {currentMovieIndex === dot ? "●" : "◇"}
             </Text>
           ))}
         </Box>
