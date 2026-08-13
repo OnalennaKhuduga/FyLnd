@@ -38,11 +38,14 @@ const Layout = () => {
 
       <GridItem
         area="aside"
+        zIndex="9"
         position="fixed"
-        top="72px"
+        top={{ base: "auto", lg: "72px" }}
+        bottom={{ base: "0", lg: "auto" }}
         left="0"
-        w={{ lg: sidebarCollapsed ? "70px" : "305px" }}
-        h="calc(100vh - 70px)"
+        w={{ base: "100%", lg: sidebarCollapsed ? "70px" : "305px" }}
+        h={{ base: "70px", lg: "calc(100vh - 70px)" }}
+        bg={{ base: "blackAlpha.700", lg: "transparent" }}
       >
         <Box h="100%">
           <Navigation
