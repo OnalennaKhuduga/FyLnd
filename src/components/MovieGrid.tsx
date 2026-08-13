@@ -1,15 +1,17 @@
 import { HStack, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
-import getMovies from "../services/movie-service";
-import InfiniteScroll from "react-infinite-scroll-component";
-import React from "react";
 
-const MovieGrid = () => {
-  const discoverEndpoint = getMovies("discover");
+interface Props {
+  endpoint: string;
+}
+
+const MovieGrid = ({ endpoint }: Props) => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
-    useMovies(discoverEndpoint);
+    useMovies(endpoint);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   if (error) return null;
