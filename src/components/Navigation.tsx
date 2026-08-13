@@ -1,5 +1,4 @@
 import { Button, HStack, Icon, Show, VStack } from "@chakra-ui/react";
-import { useState } from "react";
 import {
   FaRegArrowAltCircleLeft,
   FaRegArrowAltCircleRight,
@@ -8,6 +7,7 @@ import { FaHouseChimney, FaStar } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
 import { MdLocalFireDepartment } from "react-icons/md";
 import { RiMovieFill } from "react-icons/ri";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {
   isOpen: boolean;
@@ -15,14 +15,15 @@ interface Props {
 }
 
 const Navigation = ({ isOpen, onToggle }: Props) => {
-  const [selectedNav, setSelectedNav] = useState("Home");
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navigationItems = [
-    { title: "Search", icon: IoIosSearch },
-    { title: "Home", icon: FaHouseChimney },
-    { title: "Now Playing", icon: RiMovieFill },
-    { title: "Popular", icon: MdLocalFireDepartment },
-    { title: "Top Rated", icon: FaStar },
+    { label: "Search", icon: IoIosSearch, path: "search" },
+    { label: "Home", icon: FaHouseChimney, path: "/" },
+    { label: "Now Playing", icon: RiMovieFill, path: "/now_playing" },
+    { label: "Popular", icon: MdLocalFireDepartment, path: "/popular" },
+    { label: "Top Rated", icon: FaStar, path: "/top_rated" },
   ];
 
   return (
@@ -39,13 +40,13 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
               <Button
                 w="100%"
                 h={16}
-                variant={selectedNav === n.title ? "solid" : "ghost"}
+                variant={location.pathname === n.path ? "solid" : "ghost"}
                 justifyContent="flex-start"
-                key={n.title}
-                onClick={() => setSelectedNav(n.title)}
+                key={n.path}
+                onClick={() => navigate(n.path)}
               >
                 <Icon fontSize={20} as={n.icon} mr={4} />
-                {!isOpen && n.title}
+                {!isOpen && n.label}
               </Button>
             ))}
           </VStack>
@@ -69,12 +70,12 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
       <Show below="lg">
         <HStack padding={4} spacing={2} h="75px" justifyContent="space-between">
           {navigationItems
-            .filter((n) => n.title !== "Search")
+            .filter((n) => n.label !== "Search")
             .map((n) => (
               <Button
-                onClick={() => setSelectedNav(n.title)}
-                key={n.title}
-                variant={selectedNav === n.title ? "solid" : "ghost"}
+                onClick={() => navigate(n.path)}
+                key={n.label}
+                variant={location.pathname === n.path ? "solid" : "ghost"}
               >
                 <Icon fontSize={25} as={n.icon} />
               </Button>
