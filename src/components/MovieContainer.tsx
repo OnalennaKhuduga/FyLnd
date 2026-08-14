@@ -7,7 +7,7 @@ interface Props {
 
 const MovieContainer = ({ children }: Props) => {
   return (
-    <VStack w="100%" spacing={10} padding={2}>
+    <VStack w="100%" padding={2} spacing={8}>
       {children}
     </VStack>
   );

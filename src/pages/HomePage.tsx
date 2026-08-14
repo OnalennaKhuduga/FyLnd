@@ -1,4 +1,6 @@
+import { Box } from "@chakra-ui/react";
 import BannerContainer from "../components/BannerContainer";
+import GenreFilter from "../components/GenreFilter";
 import MovieContainer from "../components/MovieContainer";
 import MovieGrid from "../components/MovieGrid";
 import getMovies from "../services/movie-service";
@@ -9,7 +11,10 @@ const HomePage = () => {
   return (
     <MovieContainer>
       <BannerContainer />
-      <MovieGrid endpoint={discover} />
+      <Box>
+        <GenreFilter />
+        <MovieGrid endpoint={discover} />
+      </Box>
     </MovieContainer>
   );
 };
