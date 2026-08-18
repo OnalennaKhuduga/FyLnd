@@ -18,12 +18,12 @@ import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
 import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
-import getMovies from "../services/movie-service";
+import getMovieEndpoint from "../services/movie-service";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useState } from "react";
 
 const HeroBanner = () => {
-  const topRatedEndpoint = getMovies("top_rated");
+  const topRatedEndpoint = getMovieEndpoint("top_rated");
   const { data, isLoading, error } = useMovies(topRatedEndpoint);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
 

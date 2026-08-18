@@ -9,15 +9,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import genres from "../data/genres";
+import useMovieQueryStore from "../useMovieQueryStore";
 
 const GenreFilter = () => {
-  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+  const genreId = useMovieQueryStore((s) => s.movieQuery.genreId);
+  const { setGenreId } = useMovieQueryStore();
 
-  const handleSetGenre = (genre: string) => {
-    genre === selectedGenre ? setSelectedGenre(null) : setSelectedGenre(genre);
+  const handleGenreSelect = (id: number): void => {
+    id == genreId ? setGenreId(undefined) : setGenreId(id);
   };
 
   return (
@@ -37,8 +38,8 @@ const GenreFilter = () => {
                   {Array.from(genres.entries()).map(([id, title]) => (
                     <GridItem key={id}>
                       <Button
-                        variant={selectedGenre === title ? "solid" : "outline"}
-                        onClick={() => handleSetGenre(title)}
+                        variant={genreId === id ? "solid" : "outline"}
+                        onClick={() => handleGenreSelect(id)}
                       >
                         {title}
                       </Button>
@@ -55,8 +56,8 @@ const GenreFilter = () => {
         <Button
           marginX={1}
           key={id}
-          variant={selectedGenre === title ? "solid" : "outline"}
-          onClick={() => handleSetGenre(title)}
+          variant={genreId === id ? "solid" : "outline"}
+          onClick={() => handleGenreSelect(id)}
         >
           {title}
         </Button>

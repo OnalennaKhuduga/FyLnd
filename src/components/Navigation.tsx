@@ -8,6 +8,7 @@ import { IoIosSearch } from "react-icons/io";
 import { MdLocalFireDepartment } from "react-icons/md";
 import { RiMovieFill } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router-dom";
+import useMovieQueryStore from "../useMovieQueryStore";
 
 interface Props {
   isOpen: boolean;
@@ -17,6 +18,8 @@ interface Props {
 const Navigation = ({ isOpen, onToggle }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const setGenreId = useMovieQueryStore((s) => s.setGenreId);
 
   const navigationItems = [
     { label: "Search", icon: IoIosSearch, path: "search" },
@@ -43,7 +46,7 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
                 variant={location.pathname === n.path ? "solid" : "ghost"}
                 justifyContent="flex-start"
                 key={n.path}
-                onClick={() => navigate(n.path)}
+                onClick={() => (navigate(n.path), setGenreId(undefined))}
               >
                 <Icon fontSize={20} as={n.icon} mr={4} />
                 {!isOpen && n.label}
@@ -73,7 +76,7 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
             .filter((n) => n.label !== "Search")
             .map((n) => (
               <Button
-                onClick={() => navigate(n.path)}
+                onClick={() => (navigate(n.path), setGenreId(undefined))}
                 key={n.label}
                 variant={location.pathname === n.path ? "solid" : "ghost"}
               >

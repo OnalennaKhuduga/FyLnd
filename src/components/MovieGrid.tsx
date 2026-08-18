@@ -4,12 +4,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
+import getMovieEndpoint, { MovieCategory } from "../services/movie-service";
+import useMovieQueryStore from "../useMovieQueryStore";
 
 interface Props {
-  endpoint: string;
+  category: MovieCategory;
 }
 
-const MovieGrid = ({ endpoint }: Props) => {
+const MovieGrid = ({ category }: Props) => {
+  const genreId = useMovieQueryStore((s) => s.movieQuery.genreId);
+  const endpoint = getMovieEndpoint(category, genreId);
+
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
     useMovies(endpoint);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
