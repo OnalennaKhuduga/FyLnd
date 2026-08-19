@@ -1,6 +1,7 @@
-import { Avatar, HStack, Input, Text } from "@chakra-ui/react";
-import profilePicture from "../assets/profile_picture.jpg";
+import { Avatar, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import profilePicture from "../assets/profile_picture.jpg";
+import SearchInput from "./SearchInput";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,10 +31,7 @@ const NavBar = () => {
     >
       <Text>FilmFind</Text>
       <HStack>
-        <Input
-          placeholder="Search movie..."
-          minW={{ md: "250px", lg: "300px" }}
-        />
+        <SearchInput />
         <Avatar src={profilePicture} size="md" />
       </HStack>
     </HStack>
