@@ -4,12 +4,14 @@ import HomePage from "./pages/HomePage";
 import NowPlayingPage from "./pages/NowPlayingPage";
 import PopularPage from "./pages/PopularPage";
 import TopRatedPage from "./pages/TopRatedPage";
+import SearchPage from "./pages/SearchPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      { path: "search", element: <SearchPage /> },
       { index: true, element: <HomePage /> },
       { path: "now_playing", element: <NowPlayingPage /> },
       { path: "popular", element: <PopularPage /> },
