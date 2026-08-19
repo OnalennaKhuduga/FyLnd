@@ -22,7 +22,7 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
   const setGenreId = useMovieQueryStore((s) => s.setGenreId);
 
   const navigationItems = [
-    { label: "Search", icon: IoIosSearch, path: "search" },
+    { label: "Search", icon: IoIosSearch, path: "/search" },
     { label: "Home", icon: FaHouseChimney, path: "/" },
     { label: "Now Playing", icon: RiMovieFill, path: "/now_playing" },
     { label: "Popular", icon: MdLocalFireDepartment, path: "/popular" },
