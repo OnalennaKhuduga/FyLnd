@@ -13,6 +13,7 @@ import { Movie } from "../hooks/useMovies";
 import formatDate from "../utils/formatDate";
 import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
+import MovieLink from "./MovieLink";
 
 interface Props {
   movie: Movie;
@@ -46,10 +47,12 @@ const MovieSearchCard = ({ movie }: Props) => {
         padding={{ base: 4, md: 0 }}
       >
         <Box>
-          <Heading fontSize="3xl">
-            {movie.title}{" "}
-            <CriticScore score={parseInt(`${movie.vote_average}`)} />
-          </Heading>
+          <MovieLink id={movie.id}>
+            <Heading fontSize="3xl">
+              {movie.title}{" "}
+              <CriticScore score={parseInt(`${movie.vote_average}`)} />
+            </Heading>
+          </MovieLink>
           <Text color="gray">{formatDate(new Date(movie.release_date))}</Text>
         </Box>
         <HStack>

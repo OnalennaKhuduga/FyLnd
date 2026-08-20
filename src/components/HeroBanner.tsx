@@ -10,28 +10,32 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import genres from "../data/genres";
 import useMovies from "../hooks/useMovies";
+import getMovieEndpoint from "../services/movie-service";
 import formatDate from "../utils/formatDate";
 import getImage from "../utils/getImage";
 import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
 import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
-import getMovieEndpoint from "../services/movie-service";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import { useState } from "react";
+import MovieLink from "./MovieLink";
 
 const HeroBanner = () => {
   const topRatedEndpoint = getMovieEndpoint("top_rated");
   const { data, isLoading, error } = useMovies(topRatedEndpoint);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const navigate = useNavigate();
 
   if (isLoading) return <HeroBannerSkeleton />;
   if (error) return null;
 
   const currentMovie = data?.pages[0].results.slice(0, 5) ?? [];
   const {
+    id,
     title,
     overview,
     vote_average,
@@ -101,6 +105,7 @@ const HeroBanner = () => {
           borderRadius={{ base: 7, md: 20 }}
           bg={{ md: "blackAlpha.500" }}
           zIndex="1"
+          onClick={() => navigate("/movie/" + id)}
         />
 
         {/* Navigation buttons */}
@@ -153,9 +158,11 @@ const HeroBanner = () => {
             </HStack>
 
             <VStack align="flex-start" spacing={4}>
-              <Heading fontSize="xl" noOfLines={1}>
-                {title}
-              </Heading>
+              <MovieLink id={id}>
+                <Heading fontSize="xl" noOfLines={1}>
+                  {title}
+                </Heading>
+              </MovieLink>
               <HStack>
                 <MetadataList metadata={movie_metadata} />
               </HStack>

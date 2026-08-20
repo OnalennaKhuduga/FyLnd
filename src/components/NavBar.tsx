@@ -2,6 +2,7 @@ import { Avatar, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import profilePicture from "../assets/profile_picture.jpg";
 import SearchInput from "./SearchInput";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +30,7 @@ const NavBar = () => {
       backdropFilter={isScrolled ? "blur(8px)" : "none"}
       transition="background-color 0.2s ease"
     >
-      <Text>FilmFind</Text>
+      <Link to="/">FilmFind</Link>
       <HStack>
         <SearchInput />
         <Avatar src={profilePicture} size="md" />

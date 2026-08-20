@@ -10,8 +10,9 @@ import {
 import React from "react";
 import genres from "../data/genres";
 import { Movie } from "../hooks/useMovies";
-import CriticScore from "./CriticScore";
 import getImage from "../utils/getImage";
+import CriticScore from "./CriticScore";
+import MovieLink from "./MovieLink";
 
 interface Props {
   movie: Movie;
@@ -34,7 +35,9 @@ const MovieCard = ({ movie }: Props) => {
 
       <CardBody position="absolute" top="0" left="0">
         <HStack>
-          <Heading fontSize="2xl">{movie.title}</Heading>
+          <MovieLink id={movie.id}>
+            <Heading fontSize="2xl">{movie.title}</Heading>
+          </MovieLink>
           <CriticScore score={parseFloat(movie.vote_average.toFixed(1))} />
         </HStack>
         <HStack marginTop={2} color="gray.300">
