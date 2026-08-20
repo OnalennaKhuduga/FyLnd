@@ -16,7 +16,11 @@ const SearchPage = () => {
   if (error) return null;
 
   return (
-    <VStack w="100%" spacing={{ base: 10, md: 5 }} padding={{ base: 5, md: 0 }}>
+    <VStack
+      w="100%"
+      spacing={{ base: 10, md: 5 }}
+      padding={{ base: 5, md: 3, lg: 0 }}
+    >
       {data?.pages.map((p, index) => (
         <React.Fragment key={index}>
           {p.results.map((m) => (
