@@ -1,5 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "../services/api-client";
+import useMovieQueryStore from "../useMovieQueryStore";
 
 export interface Movie {
   backdrop_path: string;
@@ -14,13 +15,26 @@ export interface Movie {
 }
 
 const useMovies = (endpoint: string) => {
-  const apiClient = new APIClient<FetchResponse<Movie>>(endpoint);
+  const movieQuery = useMovieQueryStore((s) => s.movieQuery);
+  const searchEndpoint = "/search/movie";
+  const selectedEndpoint = movieQuery.searchText ? searchEndpoint : endpoint;
+  const apiClient = new APIClient<FetchResponse<Movie>>(selectedEndpoint);
+  const activeQuery = {
+    ...(movieQuery.genreId !== undefined && {
+      genreId: movieQuery.genreId,
+    }),
+
+    ...(movieQuery.searchText && {
+      searchText: movieQuery.searchText,
+    }),
+  };
 
   return useInfiniteQuery({
-    queryKey: ["movie", endpoint],
+    queryKey: ["movie", endpoint, activeQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
+          query: movieQuery.searchText,
           page: pageParam,
         },
       }),

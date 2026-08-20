@@ -18,6 +18,7 @@ interface Props {
 const Navigation = ({ isOpen, onToggle }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const setSearchText = useMovieQueryStore((s) => s.setSearchText);
 
   const setGenreId = useMovieQueryStore((s) => s.setGenreId);
 
@@ -28,6 +29,12 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
     { label: "Popular", icon: MdLocalFireDepartment, path: "/popular" },
     { label: "Top Rated", icon: FaStar, path: "/top_rated" },
   ];
+
+  const onNavigate = (path: string) => {
+    navigate(path);
+    setGenreId(undefined);
+    setSearchText("");
+  };
 
   return (
     <>
@@ -46,7 +53,7 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
                 variant={location.pathname === n.path ? "solid" : "ghost"}
                 justifyContent="flex-start"
                 key={n.path}
-                onClick={() => (navigate(n.path), setGenreId(undefined))}
+                onClick={() => onNavigate(n.path)}
               >
                 <Icon fontSize={20} as={n.icon} mr={4} />
                 {!isOpen && n.label}
@@ -76,7 +83,7 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
             .filter((n) => n.label !== "Search")
             .map((n) => (
               <Button
-                onClick={() => (navigate(n.path), setGenreId(undefined))}
+                onClick={() => onNavigate(n.path)}
                 key={n.label}
                 variant={location.pathname === n.path ? "solid" : "ghost"}
               >

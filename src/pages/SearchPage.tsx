@@ -3,10 +3,14 @@ import React from "react";
 import MovieSearchCard from "../components/MovieSearchCard";
 import useMovies from "../hooks/useMovies";
 import getMovieEndpoint from "../services/movie-service";
+import useMovieQueryStore from "../useMovieQueryStore";
 
 const SearchPage = () => {
   const popular = getMovieEndpoint("popular");
-  const { data, error, isLoading } = useMovies(popular);
+  const movieQuery = useMovieQueryStore((s) => s.movieQuery);
+  const selectedEndpoint = movieQuery.searchText ? "/search/movie" : popular;
+
+  const { data, error, isLoading } = useMovies(selectedEndpoint);
 
   if (isLoading) return <Spinner />;
   if (error) return null;
