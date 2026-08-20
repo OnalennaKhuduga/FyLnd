@@ -30,7 +30,7 @@ const useMovies = (endpoint: string) => {
   };
 
   return useInfiniteQuery({
-    queryKey: ["movie", endpoint, activeQuery],
+    queryKey: ["movies", endpoint, activeQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
