@@ -22,3 +22,16 @@ export interface MovieDetails extends MovieBase {
   genres: Genre[];
   runtime: number;
 }
+
+export interface MovieVideo {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+  official: boolean;
+}
+
+export interface MovieVideoResponse {
+  results: MovieVideo[];
+}

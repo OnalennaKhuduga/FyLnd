@@ -27,6 +27,10 @@ class APIClient<T> {
       .get<T>(this.endpoint + `/${id}`)
       .then((res) => res.data);
   };
+
+  getVideos = (id: number) => {
+    return axiosInstance.get<T>(`/movie/${id}/videos`).then((res) => res.data);
+  };
 }
 
 export default APIClient;
