@@ -3,7 +3,7 @@ interface Genre {
   name: string;
 }
 
-interface MovieBase {
+export interface MovieBase {
   id: number;
   backdrop_path: string;
   original_language: string;
@@ -20,4 +20,5 @@ export interface Movie extends MovieBase {
 
 export interface MovieDetails extends MovieBase {
   genres: Genre[];
+  runtime: number;
 }
