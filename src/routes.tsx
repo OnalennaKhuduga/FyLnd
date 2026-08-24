@@ -5,8 +5,8 @@ import NowPlayingPage from "./pages/NowPlayingPage";
 import PopularPage from "./pages/PopularPage";
 import TopRatedPage from "./pages/TopRatedPage";
 import SearchPage from "./pages/SearchPage";
-import MovieDetailPage from "./pages/MovieDetailPage";
-import MovieDetailLayout from "./pages/MovieDetailLayout";
+import MovieDetailPage from "./pages/MovieDetail/MovieDetailPage";
+import MovieDetailLayout from "./pages/MovieDetail/MovieDetailLayout";
 
 const router = createBrowserRouter([
   {
