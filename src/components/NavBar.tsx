@@ -4,7 +4,11 @@ import profilePicture from "../assets/profile_picture.jpg";
 import SearchInput from "./SearchInput";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+interface Props {
+  isDark?: boolean;
+}
+
+const NavBar = ({ isDark }: Props) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Checks whether user has scrolled or not
@@ -26,7 +30,13 @@ const NavBar = () => {
       padding={3}
       paddingX={6}
       spacing={5}
-      bg={isScrolled ? "blackAlpha.700" : "transparent"}
+      bg={
+        !isDark
+          ? isScrolled
+            ? "blackAlpha.700"
+            : "transparent"
+          : "blackAlpha.700"
+      }
       backdropFilter={isScrolled ? "blur(8px)" : "none"}
       transition="background-color 0.2s ease"
     >
