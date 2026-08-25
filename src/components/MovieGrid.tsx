@@ -2,7 +2,7 @@ import { HStack, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useMovies from "../hooks/useMovies";
-import MovieCard from "./MovieCard";
+import MovieGridCard from "./MovieGridCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import getMovieEndpoint, { MovieCategory } from "../services/movie-service";
 import useMovieQueryStore from "../useMovieQueryStore";
@@ -32,11 +32,7 @@ const MovieGrid = ({ category }: Props) => {
       loader={<Spinner />}
       endMessage={<Text align="center"> All movies loaded.</Text>}
     >
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        padding={2}
-        spacing={8}
-      >
+      <SimpleGrid columns={{ base: 2, lg: 3, xl: 4 }} padding={2} spacing={8}>
         {isLoading &&
           skeletons.map((skel) => (
             <HStack spacing={2} key={skel}>
@@ -46,7 +42,7 @@ const MovieGrid = ({ category }: Props) => {
         {data?.pages.map((page, index) => (
           <React.Fragment key={index}>
             {page.results.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieGridCard key={movie.id} movie={movie} />
             ))}
           </React.Fragment>
         ))}
