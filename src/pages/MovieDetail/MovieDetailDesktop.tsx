@@ -1,6 +1,3 @@
-import { useParams } from "react-router-dom";
-import useMovie from "../../hooks/useMovie";
-import useSimilarMovies from "../../hooks/useSimilarMovies";
 import {
   AspectRatio,
   Badge,
@@ -11,44 +8,37 @@ import {
   Heading,
   HStack,
   Icon,
-  Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import CriticScore from "../../components/CriticScore";
-import getImage from "../../utils/getImage";
-import MetadataList from "../../components/MetadataList";
 import { FaPlay } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
+import YouTube from "react-youtube";
+import CriticScore from "../../components/CriticScore";
+import MetadataList from "../../components/MetadataList";
 import MovieDetailCard from "../../components/MovieDetailCard";
 import useMovieVideos from "../../hooks/useMovieVideo";
-import { useEffect, useState } from "react";
+import useShowTrailer from "../../hooks/useShowTrailer";
+import { Movie, MovieDetails } from "../../types/movie";
+import getImage from "../../utils/getImage";
 
-const MovieDetailDesktop = () => {
-  const { id } = useParams();
-  const { data, error, isLoading } = useMovie(parseInt(id!));
-  const { data: movies } = useSimilarMovies(parseInt(id!));
+interface Props {
+  movieId: number;
+  movie: MovieDetails;
+  similarMovies: Movie[];
+}
 
-  const { data: video } = useMovieVideos(parseInt(id!));
+const MovieDetailDesktop = ({ movieId, movie, similarMovies }: Props) => {
+  const { data: video } = useMovieVideos(movieId);
   const trailer = video?.results.find(
     (video) =>
       video.site === "YouTube" && video.type === "Trailer" && video.official,
   );
-  const [showTrailer, setShowTrailer] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowTrailer(true);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) return <Spinner />;
-  if (error) return null;
+  const showTrailer = useShowTrailer(3000);
 
   const { title, overview, genres, vote_average, release_date, runtime } =
-    data!;
+    movie!;
 
   const metadata = [
     <CriticScore score={parseInt(vote_average.toFixed(1))} />,
@@ -65,7 +55,7 @@ const MovieDetailDesktop = () => {
         left="0"
         h="100%"
         w="100%"
-        bgImage={getImage(data?.backdrop_path || "")}
+        bgImage={getImage(movie?.backdrop_path || "")}
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"
@@ -135,15 +125,14 @@ const MovieDetailDesktop = () => {
             <Box flex="1">
               {showTrailer && trailer && (
                 <AspectRatio ratio={16 / 9} maxH="400px">
-                  <iframe
-                    title={trailer?.name}
-                    src={
-                      trailer
-                        ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1`
-                        : undefined
-                    }
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
+                  <YouTube
+                    videoId={trailer?.key}
+                    opts={{
+                      playerVars: {
+                        autoplay: 1,
+                        mute: 0,
+                      },
+                    }}
                   />
                 </AspectRatio>
               )}
@@ -156,7 +145,7 @@ const MovieDetailDesktop = () => {
             </Heading>
 
             <Grid templateColumns="repeat(4, 1fr)" gap={3}>
-              {movies?.results.slice(0, 4).map((m, index) => (
+              {similarMovies?.slice(0, 4).map((m, index) => (
                 <GridItem key={index} display="flex" alignItems="center">
                   <MovieDetailCard movie={m} />
                 </GridItem>

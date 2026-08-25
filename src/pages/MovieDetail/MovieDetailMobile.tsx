@@ -1,0 +1,118 @@
+import {
+  AspectRatio,
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import YouTube from "react-youtube";
+import CriticScore from "../../components/CriticScore";
+import MetadataList from "../../components/MetadataList";
+import MovieDetailCardMobile from "../../components/MovieDetailCardMobile";
+import useMovieVideos from "../../hooks/useMovieVideo";
+import useShowTrailer from "../../hooks/useShowTrailer";
+import { Movie, MovieDetails } from "../../types/movie";
+import getImage from "../../utils/getImage";
+
+interface Props {
+  movieId: number;
+  movie: MovieDetails;
+  similarMovies: Movie[];
+}
+
+const MovieDetailMobile = ({ movieId, movie, similarMovies }: Props) => {
+  const { data: video } = useMovieVideos(movieId);
+  const trailer = video?.results.find(
+    (video) =>
+      video.site === "YouTube" && video.type === "Trailer" && video.official,
+  );
+
+  const showTrailer = useShowTrailer(3000);
+
+  const {
+    title,
+    genres,
+    overview,
+    backdrop_path,
+    vote_average,
+    runtime,
+    release_date,
+  } = movie;
+
+  const metadata = [
+    <CriticScore score={parseInt(vote_average.toFixed(1))} />,
+    runtime + " min",
+    release_date,
+  ];
+
+  return (
+    <VStack h="100vh">
+      {/* Backdrop Image and Trailer */}
+      <Box h="100%" w="100%">
+        {showTrailer ? (
+          <AspectRatio ratio={16 / 9}>
+            <YouTube
+              videoId={trailer?.key}
+              opts={{
+                playerVars: {
+                  autoplay: 1,
+                },
+              }}
+            />
+          </AspectRatio>
+        ) : (
+          <Image
+            src={getImage(backdrop_path)}
+            objectFit="cover"
+            alt="backdrop-image"
+          />
+        )}
+      </Box>
+
+      {/* Content */}
+      <VStack align="flex-start" w="100%" padding={4} spacing={5}>
+        <HStack>
+          {genres.map((g, index) => (
+            <Box key={index}>
+              <Badge colorScheme="white">{g.name}</Badge>
+            </Box>
+          ))}
+        </HStack>
+
+        <VStack align="flex-start">
+          <Heading fontSize="3xl">{title}</Heading>
+          <HStack paddingY={1}>
+            <MetadataList metadata={metadata} />
+          </HStack>
+
+          <VStack w="100%" gap={1}>
+            <Button colorScheme="blue" w="inherit">
+              Watch Now
+            </Button>
+            <Button variant="solid" w="inherit">
+              Add to WatchList
+            </Button>
+          </VStack>
+
+          <Text>{overview}</Text>
+        </VStack>
+
+        <Flex direction="column" gap={3} w="100%" alignItems="flex-start">
+          {movie &&
+            similarMovies.map((m) => (
+              <Box key={m.id}>
+                <MovieDetailCardMobile movie={m} />
+              </Box>
+            ))}
+        </Flex>
+      </VStack>
+    </VStack>
+  );
+};
+
+export default MovieDetailMobile;

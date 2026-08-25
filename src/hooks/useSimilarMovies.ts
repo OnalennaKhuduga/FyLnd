@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "../services/api-client";
-import { MovieBase } from "../types/movie";
+import { Movie, MovieBase } from "../types/movie";
 
 const useSimilarMovies = (id: number) => {
-  const apiClient = new APIClient<FetchResponse<MovieBase>>(
-    `/movie/${id}/similar`,
-  );
+  const apiClient = new APIClient<FetchResponse<Movie>>(`/movie/${id}/similar`);
 
   return useQuery({
     queryKey: ["similar", id],

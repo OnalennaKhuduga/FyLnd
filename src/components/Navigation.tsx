@@ -11,8 +11,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useMovieQueryStore from "../useMovieQueryStore";
 
 interface Props {
-  isOpen: boolean;
-  onToggle: () => void;
+  isOpen?: boolean;
+  onToggle?: () => void;
 }
 
 const Navigation = ({ isOpen, onToggle }: Props) => {

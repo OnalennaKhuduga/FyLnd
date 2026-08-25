@@ -9,11 +9,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import genres from "../data/genres";
-import { Movie } from "../hooks/useMovies";
 import formatDate from "../utils/formatDate";
 import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
 import MovieLink from "./MovieLink";
+import { Movie } from "../types/movie";
 
 interface Props {
   movie: Movie;
