@@ -3,7 +3,6 @@ import {
   Box,
   Heading,
   HStack,
-  Image,
   Stack,
   Text,
   VStack,
@@ -14,6 +13,8 @@ import { Movie } from "../types/movie";
 import formatDate from "../utils/formatDate";
 import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
+import MovieImage from "./MovieImage";
+import MoviePlaceholder from "./MoviePlaceholder";
 
 interface Props {
   movie: Movie;
@@ -34,7 +35,10 @@ const MovieSearchCard = ({ movie }: Props) => {
     >
       {/* backdrop image */}
       <Box width="25%">
-        <Image borderRadius={5} src={getImage(movie.backdrop_path)} />
+        <MovieImage
+          src={movie.backdrop_path ? getImage(movie.backdrop_path) : undefined}
+          placeholder={<MoviePlaceholder />}
+        />
       </Box>
 
       {/* movie metadata */}

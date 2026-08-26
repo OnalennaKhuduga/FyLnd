@@ -1,6 +1,8 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { MovieBase } from "../types/movie";
 import getImage from "../utils/getImage";
+import MovieImage from "./MovieImage";
+import MoviePlaceholder from "./MoviePlaceholder";
 
 interface Props {
   movie: MovieBase;
@@ -14,12 +16,13 @@ const MovieDetailCard = ({ movie }: Props) => {
         transition: "transform 0.15s ease-in-out",
         cursor: "pointer",
       }}
+      w="100%"
+      h="100%"
     >
-      <Box position="relative">
-        <Image
-          src={getImage(movie.backdrop_path)}
-          boxSize="cover"
-          borderRadius={10}
+      <Box position="relative" w="100%" h="100%">
+        <MovieImage
+          src={movie.backdrop_path ? getImage(movie.backdrop_path) : undefined}
+          placeholder={<MoviePlaceholder />}
         />
 
         <Box
@@ -35,7 +38,7 @@ const MovieDetailCard = ({ movie }: Props) => {
           justifyContent="flex-end"
           alignItems="flex-start"
           bg="rgba(0, 0, 0, 0.3)"
-          opacity="0"
+          opacity={movie.backdrop_path ? "0" : "1"}
           _hover={{
             opacity: "1",
           }}

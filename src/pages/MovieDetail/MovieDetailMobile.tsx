@@ -6,7 +6,6 @@ import {
   Flex,
   Heading,
   HStack,
-  Image,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -14,6 +13,8 @@ import YouTube from "react-youtube";
 import CriticScore from "../../components/CriticScore";
 import MetadataList from "../../components/MetadataList";
 import MovieDetailCardMobile from "../../components/MovieDetailCardMobile";
+import MovieImage from "../../components/MovieImage";
+import MoviePlaceholder from "../../components/MoviePlaceholder";
 import useMovieVideos from "../../hooks/useMovieVideo";
 import useShowTrailer from "../../hooks/useShowTrailer";
 import { Movie, MovieDetails } from "../../types/movie";
@@ -66,10 +67,11 @@ const MovieDetailMobile = ({ movieId, movie, similarMovies }: Props) => {
             />
           </AspectRatio>
         ) : (
-          <Image
-            src={getImage(backdrop_path)}
-            objectFit="cover"
-            alt="backdrop-image"
+          <MovieImage
+            src={
+              movie.backdrop_path ? getImage(movie.backdrop_path) : undefined
+            }
+            placeholder={<MoviePlaceholder />}
           />
         )}
       </Box>

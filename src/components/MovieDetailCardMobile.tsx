@@ -1,15 +1,9 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { MovieBase } from "../types/movie";
 import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
+import MovieImage from "./MovieImage";
+import MoviePlaceholder from "./MoviePlaceholder";
 
 interface Props {
   movie: MovieBase;
@@ -17,9 +11,12 @@ interface Props {
 
 const MovieDetailCardMobile = ({ movie }: Props) => {
   return (
-    <Flex>
-      <Box maxW="100px">
-        <Image src={getImage(movie.poster_path)} borderRadius={5} />
+    <Flex w="100%" h="100%">
+      <Box maxW="100px" h="100%" w="100%">
+        <MovieImage
+          src={movie.poster_path ? getImage(movie.poster_path) : undefined}
+          placeholder={<MoviePlaceholder />}
+        />
       </Box>
 
       <VStack padding={2} align="flex-start">

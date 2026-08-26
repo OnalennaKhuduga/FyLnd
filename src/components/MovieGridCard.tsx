@@ -1,16 +1,10 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Movie } from "../types/movie";
 import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
+import MovieImage from "./MovieImage";
+import MoviePlaceholder from "./MoviePlaceholder";
 
 interface Props {
   movie: Movie;
@@ -22,19 +16,19 @@ const MovieGridCard = ({ movie }: Props) => {
   return (
     <Flex
       direction="column"
-      maxW="2=300px"
+      maxW="300px"
       _hover={{
         transform: "scale(1.02)",
         transition: "transform 0.15s ease-in-out",
         cursor: "pointer",
       }}
+      h="100%"
       onClick={() => navigate(`/movie/${movie.id}`)}
     >
-      <Box flex="3">
-        <Image
-          src={getImage(movie.poster_path)}
-          objectFit="cover"
-          borderRadius={4}
+      <Box flex="3" w="100%" h="100%">
+        <MovieImage
+          src={movie.poster_path ? getImage(movie.poster_path) : undefined}
+          placeholder={<MoviePlaceholder />}
         />
       </Box>
 
