@@ -3,9 +3,11 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import NavBar from "../components/NavBar";
+import useResetSearchOnNavigation from "../hooks/useResetSearchOnNavigation";
 
 const Layout = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  useResetSearchOnNavigation();
 
   return (
     <Grid

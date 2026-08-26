@@ -18,7 +18,6 @@ interface Props {
 const Navigation = ({ isOpen, onToggle }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const setSearchText = useMovieQueryStore((s) => s.setSearchText);
 
   const setGenreId = useMovieQueryStore((s) => s.setGenreId);
 
@@ -33,7 +32,6 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
   const onNavigate = (path: string) => {
     navigate(path);
     setGenreId(undefined);
-    setSearchText("");
   };
 
   return (
