@@ -8,51 +8,42 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import genres from "../data/genres";
+import { Movie } from "../types/movie";
 import formatDate from "../utils/formatDate";
 import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
-import MovieLink from "./MovieLink";
-import { Movie } from "../types/movie";
 
 interface Props {
   movie: Movie;
 }
 
 const MovieSearchCard = ({ movie }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Stack
-      direction={{ base: "column", md: "row" }}
+      direction="row"
       w="100%"
       align="stretch"
-      borderStyle={{ base: "solid", md: "none" }}
-      borderColor="white"
-      borderWidth="1px"
       borderRadius={5}
       key={movie.id}
+      onClick={() => navigate(`/movie/${movie.id}`)}
+      _hover={{ cursor: "pointer" }}
     >
       {/* backdrop image */}
-      <Box width={{ base: "100%", md: "25%" }}>
-        <Image
-          borderRadius={{ base: 0, md: 5 }}
-          src={getImage(movie.backdrop_path)}
-        />
+      <Box width="25%">
+        <Image borderRadius={5} src={getImage(movie.backdrop_path)} />
       </Box>
 
       {/* movie metadata */}
-      <VStack
-        align="start"
-        fontSize="sm"
-        spacing={4}
-        padding={{ base: 4, md: 0 }}
-      >
+      <VStack align="start" fontSize="sm" spacing={4}>
         <Box>
-          <MovieLink id={movie.id}>
-            <Heading fontSize="3xl">
-              {movie.title}{" "}
-              <CriticScore score={parseInt(`${movie.vote_average}`)} />
-            </Heading>
-          </MovieLink>
+          <Heading fontSize="3xl">
+            {movie.title}{" "}
+            <CriticScore score={parseInt(`${movie.vote_average}`)} />
+          </Heading>
           <Text color="gray">{formatDate(new Date(movie.release_date))}</Text>
         </Box>
         <HStack>

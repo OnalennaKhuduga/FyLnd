@@ -1,5 +1,12 @@
-import { Heading, Spinner, VStack } from "@chakra-ui/react";
-import React from "react";
+import {
+  Grid,
+  GridItem,
+  Heading,
+  Show,
+  Spinner,
+  VStack,
+} from "@chakra-ui/react";
+import MovieGridCard from "../components/MovieGridCard";
 import MovieSearchCard from "../components/MovieSearchCard";
 import useMovies from "../hooks/useMovies";
 import getMovieEndpoint from "../services/movie-service";
@@ -28,11 +35,22 @@ const SearchPage = () => {
     >
       <Heading fontSize="2xl">{displayedMovies}</Heading>
       {data?.pages.map((p, index) => (
-        <React.Fragment key={index}>
+        <Grid
+          templateColumns={{ base: "repeat(2, 1fr)", lg: "repeat(1, 1fr)" }}
+          gap={2}
+          key={index}
+        >
           {p.results.map((m) => (
-            <MovieSearchCard key={m.id} movie={m} />
+            <GridItem key={m.id}>
+              <Show below="lg">
+                <MovieGridCard movie={m} />
+              </Show>
+              <Show above="lg">
+                <MovieSearchCard movie={m} />
+              </Show>
+            </GridItem>
           ))}
-        </React.Fragment>
+        </Grid>
       ))}
     </VStack>
   );
