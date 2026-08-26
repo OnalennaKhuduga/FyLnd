@@ -1,4 +1,5 @@
 import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { MovieBase } from "../types/movie";
 import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
@@ -10,8 +11,10 @@ interface Props {
 }
 
 const MovieDetailCardMobile = ({ movie }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <Flex w="100%" h="100%">
+    <Flex w="100%" h="100%" onClick={() => navigate(`/movie/${movie.id}`)}>
       <Box maxW="100px" h="100%" w="100%">
         <MovieImage
           src={movie.poster_path ? getImage(movie.poster_path) : undefined}

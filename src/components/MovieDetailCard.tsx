@@ -1,4 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { MovieBase } from "../types/movie";
 import getImage from "../utils/getImage";
 import MovieImage from "./MovieImage";
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const MovieDetailCard = ({ movie }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       _hover={{
@@ -18,6 +21,7 @@ const MovieDetailCard = ({ movie }: Props) => {
       }}
       w="100%"
       h="100%"
+      onClick={() => navigate(`/movie/${movie.id}`)}
     >
       <Box position="relative" w="100%" h="100%">
         <MovieImage
