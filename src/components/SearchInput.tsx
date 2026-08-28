@@ -8,12 +8,10 @@ import {
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import useMovieQueryStore from "../useMovieQueryStore";
-import { useNavigate } from "react-router-dom";
 
 const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
   const setSearchText = useMovieQueryStore((s) => s.setSearchText);
-  const navigate = useNavigate();
 
   return (
     <form
@@ -29,7 +27,6 @@ const SearchInput = () => {
         <Input
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onClick={() => navigate("/search")}
           placeholder="Search movie..."
           minW={{ md: "250px", lg: "300px" }}
         />

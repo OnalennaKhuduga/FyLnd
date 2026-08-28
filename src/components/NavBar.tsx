@@ -1,14 +1,18 @@
-import { Avatar, HStack, Text } from "@chakra-ui/react";
+import { Avatar, Button, HStack, Icon } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { IoIosSearch } from "react-icons/io";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import profilePicture from "../assets/profile_picture.jpg";
 import SearchInput from "./SearchInput";
-import { Link } from "react-router-dom";
 
 interface Props {
   isDark?: boolean;
 }
 
 const NavBar = ({ isDark }: Props) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchPath = "/search";
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Checks whether user has scrolled or not
@@ -42,7 +46,18 @@ const NavBar = ({ isDark }: Props) => {
     >
       <Link to="/">FilmFind</Link>
       <HStack>
-        <SearchInput />
+        {location.pathname === searchPath ? (
+          <SearchInput />
+        ) : (
+          <Button
+            onClick={() => navigate(searchPath)}
+            fontSize="2xl"
+            fontWeight="bold"
+            variant="ghost"
+          >
+            <Icon as={IoIosSearch} />
+          </Button>
+        )}
         <Avatar src={profilePicture} size="md" />
       </HStack>
     </HStack>
