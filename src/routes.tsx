@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
+import Layout from "./pages/Layout";
+import MovieDetailLayout from "./pages/MovieDetail/MovieDetailLayout";
+import MovieDetailPage from "./pages/MovieDetail/MovieDetailPage";
 import NowPlayingPage from "./pages/NowPlayingPage";
 import PopularPage from "./pages/PopularPage";
-import TopRatedPage from "./pages/TopRatedPage";
 import SearchPage from "./pages/SearchPage";
-import MovieDetailPage from "./pages/MovieDetail/MovieDetailPage";
-import MovieDetailLayout from "./pages/MovieDetail/MovieDetailLayout";
+import TopRatedPage from "./pages/TopRatedPage";
+import AboutPage from "./pages/about/AboutPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
     path: "/movie/:id",
     element: <MovieDetailLayout />,
     children: [{ index: true, element: <MovieDetailPage /> }],
+  },
+  {
+    path: "/about",
+    element: <MovieDetailLayout />,
+    children: [{ index: true, element: <AboutPage /> }],
   },
 ]);
 

@@ -58,6 +58,7 @@ const NavBar = ({ isDark }: Props) => {
             <Icon as={IoIosSearch} />
           </Button>
         )}
+        <Button onClick={() => navigate("/about")}>About</Button>
         <Avatar src={profilePicture} size="md" />
       </HStack>
     </HStack>
