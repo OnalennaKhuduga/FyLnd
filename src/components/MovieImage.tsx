@@ -2,7 +2,7 @@ import { Image } from "@chakra-ui/react";
 
 interface Props {
   src?: string | null;
-  placeholder: React.ReactNode;
+  placeholder: React.ReactElement;
 }
 
 const MovieImage = ({ src, placeholder }: Props) => {
