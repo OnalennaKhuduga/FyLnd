@@ -22,7 +22,6 @@ import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
 import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
-import MovieLink from "./MovieLink";
 
 const HeroBanner = () => {
   const topRatedEndpoint = getMovieEndpoint("top_rated");
@@ -85,7 +84,11 @@ const HeroBanner = () => {
       mx="auto"
       ratio={{ base: 9 / 16, md: 2.5 / 1 }}
     >
-      <Box display="inline-block" position="relative">
+      <Box
+        display="inline-block"
+        position="relative"
+        _hover={{ cursor: "pointer" }}
+      >
         <Box
           position="absolute"
           inset="0"
@@ -110,7 +113,6 @@ const HeroBanner = () => {
           borderRadius={{ base: 7, md: 20 }}
           bg={{ md: "blackAlpha.500" }}
           zIndex="1"
-          onClick={() => navigate("/movie/" + id)}
         />
 
         {/* Navigation buttons */}
@@ -126,11 +128,18 @@ const HeroBanner = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            opacity="0"
+            opacity={{ base: "1", lg: "0" }}
             _hover={{ opacity: "1" }}
             transition="opacity 0.125s ease"
           >
-            <Button variant="unstyled" onClick={action}>
+            <Button
+              variant="unstyled"
+              onClick={action}
+              h={{ base: "20%", md: "60%" }}
+              w="100%"
+              borderRadius={10}
+              bg="blackAlpha.300"
+            >
               <Icon
                 fontSize="3xl"
                 _hover={{ fontSize: "4xl" }}
@@ -153,6 +162,7 @@ const HeroBanner = () => {
             padding={8}
             justifyContent="space-between"
             zIndex="2"
+            onClick={() => navigate("/movie/" + id)}
           >
             <HStack>
               {genre_ids.map((g) => (
@@ -163,11 +173,9 @@ const HeroBanner = () => {
             </HStack>
 
             <VStack align="flex-start" spacing={4}>
-              <MovieLink id={id}>
-                <Heading fontSize="xl" noOfLines={1}>
-                  {title}
-                </Heading>
-              </MovieLink>
+              <Heading fontSize="xl" noOfLines={1}>
+                {title}
+              </Heading>
               <HStack>
                 <MetadataList metadata={movie_metadata} />
               </HStack>
