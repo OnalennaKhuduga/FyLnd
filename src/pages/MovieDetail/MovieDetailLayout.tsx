@@ -22,6 +22,7 @@ const MovieDetailLayout = () => {
           bottom="0"
           left="0"
           w="100%"
+          maxH="70px"
           bg="rgba(0, 0, 0, 0.6)"
         >
           <Navigation />
