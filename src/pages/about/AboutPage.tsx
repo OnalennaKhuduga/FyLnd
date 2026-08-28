@@ -6,7 +6,7 @@ const AboutPage = () => {
   return (
     <Box h="100vh" w="100vw">
       <VStack padding={10} justifyContent="space-between" gap={5} paddingY={20}>
-        <Heading fontSize="3xl">ABOUT FILMFIND</Heading>
+        <Heading fontSize="3xl">ABOUT FyLnd</Heading>
         <Text>Explore movies. Discover something worth watching.</Text>
 
         <VStack
@@ -16,12 +16,11 @@ const AboutPage = () => {
           borderColor="whiteAlpha.800"
           padding={10}
           w="100%"
-          // h="100%"
         >
           <Heading fontSize="2xl">ABOUT THE APP</Heading>
 
           <Text>
-            FilmFind is a movie browsing application designed to make exploring
+            FyLnd is a movie browsing application designed to make exploring
             movies simple and enjoyable.
           </Text>
         </VStack>

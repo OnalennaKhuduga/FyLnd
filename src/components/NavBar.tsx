@@ -44,7 +44,7 @@ const NavBar = ({ isDark }: Props) => {
       backdropFilter={isScrolled ? "blur(8px)" : "none"}
       transition="background-color 0.2s ease"
     >
-      <Link to="/">FilmFind</Link>
+      <Link to="/">FyLnd</Link>
       <HStack>
         {location.pathname === searchPath ? (
           <SearchInput />
