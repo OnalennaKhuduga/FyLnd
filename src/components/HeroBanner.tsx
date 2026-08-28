@@ -80,7 +80,11 @@ const HeroBanner = () => {
   ];
 
   return (
-    <AspectRatio ratio={{ base: 9 / 16, md: 16 / 9 }}>
+    <AspectRatio
+      w={{ base: "80%", md: "100%" }}
+      mx="auto"
+      ratio={{ base: 9 / 16, md: 2.5 / 1 }}
+    >
       <Box display="inline-block" position="relative">
         <Box
           position="absolute"
@@ -90,6 +94,7 @@ const HeroBanner = () => {
             md: getImage(backdrop_path),
           }}
           bgPosition="center"
+          bgRepeat="no-repeat"
           bgSize="cover"
           borderRadius={{ base: 7, md: 20 }}
           transition="opacity 0.4s ease-in-out"
