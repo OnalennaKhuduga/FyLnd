@@ -8,7 +8,6 @@ import { IoIosSearch } from "react-icons/io";
 import { MdLocalFireDepartment } from "react-icons/md";
 import { RiMovieFill } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router-dom";
-import useMovieQueryStore from "../useMovieQueryStore";
 
 interface Props {
   isOpen?: boolean;
@@ -18,8 +17,6 @@ interface Props {
 const Navigation = ({ isOpen, onToggle }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
-
-  const setGenreId = useMovieQueryStore((s) => s.setGenreId);
 
   const navigationItems = [
     { label: "Search", icon: IoIosSearch, path: "/search" },
@@ -31,7 +28,6 @@ const Navigation = ({ isOpen, onToggle }: Props) => {
 
   const onNavigate = (path: string) => {
     navigate(path);
-    setGenreId(undefined);
   };
 
   return (

@@ -1,14 +1,15 @@
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useMovieQueryStore from "../useMovieQueryStore";
-import { useEffect } from "react";
 
 const useResetSearchOnNavigation = () => {
   const location = useLocation();
-  const setSearchText = useMovieQueryStore((s) => s.setSearchText);
+  const { setGenreId, setSearchText } = useMovieQueryStore();
 
   useEffect(() => {
     setSearchText("");
-  }, [location.pathname, setSearchText]);
+    setGenreId(undefined);
+  }, [location.pathname, setSearchText, setGenreId]);
 };
 
 export default useResetSearchOnNavigation;
