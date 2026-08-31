@@ -113,6 +113,7 @@ const HeroBanner = () => {
           borderRadius={{ base: 7, md: 20 }}
           bg={{ md: "blackAlpha.500" }}
           zIndex="1"
+          onClick={() => navigate("/movie/" + id)}
         />
 
         {/* Navigation buttons */}
