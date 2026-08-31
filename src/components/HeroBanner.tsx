@@ -122,7 +122,7 @@ const HeroBanner = () => {
             position="absolute"
             top="0"
             {...(side === "left" ? { left: "0" } : { right: "0" })} // Set the position of the button in banner
-            h="90%"
+            h="80%"
             w="9%"
             zIndex="3"
             display="flex"
