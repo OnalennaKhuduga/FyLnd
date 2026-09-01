@@ -8,6 +8,8 @@ import PopularPage from "./pages/PopularPage";
 import SearchPage from "./pages/SearchPage";
 import TopRatedPage from "./pages/TopRatedPage";
 import AboutPage from "./pages/about/AboutPage";
+import WatchlistPage from "./pages/Watchlist/WatchlistPage";
+import WatchlistLayout from "./pages/Watchlist/WatchlistLayout";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,11 @@ const router = createBrowserRouter([
     path: "/movie/:id",
     element: <MovieDetailLayout />,
     children: [{ index: true, element: <MovieDetailPage /> }],
+  },
+  {
+    path: "/watchlist",
+    element: <WatchlistLayout />,
+    children: [{ index: true, element: <WatchlistPage /> }],
   },
   {
     path: "/about",
