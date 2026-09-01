@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import genres from "../data/genres";
-import useMovieQueryStore from "../useMovieQueryStore";
+import useMovieQueryStore from "../stores/useMovieQueryStore";
 
 const GenreFilter = () => {
   const genreId = useMovieQueryStore((s) => s.movieQuery.genreId);

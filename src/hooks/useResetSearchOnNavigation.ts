@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import useMovieQueryStore from "../useMovieQueryStore";
+import useMovieQueryStore from "../stores/useMovieQueryStore";
 
 const useResetSearchOnNavigation = () => {
   const location = useLocation();

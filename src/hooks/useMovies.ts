@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "../services/api-client";
-import useMovieQueryStore from "../useMovieQueryStore";
+import useMovieQueryStore from "../stores/useMovieQueryStore";
 import { Movie } from "../types/movie";
 
 const useMovies = (endpoint: string) => {

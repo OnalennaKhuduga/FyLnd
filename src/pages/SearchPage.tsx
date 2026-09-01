@@ -10,7 +10,7 @@ import MovieGridCard from "../components/MovieGridCard";
 import MovieSearchCard from "../components/MovieSearchCard";
 import useMovies from "../hooks/useMovies";
 import getMovieEndpoint from "../services/movie-service";
-import useMovieQueryStore from "../useMovieQueryStore";
+import useMovieQueryStore from "../stores/useMovieQueryStore";
 
 const SearchPage = () => {
   const popular = getMovieEndpoint("popular");

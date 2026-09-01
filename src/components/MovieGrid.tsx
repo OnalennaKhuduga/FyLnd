@@ -5,7 +5,7 @@ import useMovies from "../hooks/useMovies";
 import MovieGridCard from "./MovieGridCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import getMovieEndpoint, { MovieCategory } from "../services/movie-service";
-import useMovieQueryStore from "../useMovieQueryStore";
+import useMovieQueryStore from "../stores/useMovieQueryStore";
 
 interface Props {
   category: MovieCategory;

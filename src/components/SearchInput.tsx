@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import useMovieQueryStore from "../useMovieQueryStore";
+import useMovieQueryStore from "../stores/useMovieQueryStore";
 
 const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
