@@ -5,6 +5,7 @@ import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
 import MovieImage from "./MovieImage";
 import MoviePlaceholder from "./MoviePlaceholder";
+import WatchlistButton from "./WatchlistButton";
 
 interface Props {
   movie: Movie;
@@ -33,12 +34,18 @@ const MovieGridCard = ({ movie }: Props) => {
       </Box>
 
       <VStack align="flex-start" flex="1" padding={1} spacing={0}>
-        <HStack justifyContent="space-between">
+        <HStack w="100%" justifyContent="space-between">
+          <HStack justifyContent="space-between">
+            <Box>
+              <Heading fontSize="md">{movie.title}</Heading>
+            </Box>
+            <Box>
+              <CriticScore score={parseInt(movie.vote_average.toFixed(1))} />
+            </Box>
+          </HStack>
+
           <Box>
-            <Heading fontSize="md">{movie.title}</Heading>
-          </Box>
-          <Box>
-            <CriticScore score={parseInt(movie.vote_average.toFixed(1))} />
+            <WatchlistButton movie={movie} variant="icon" />
           </Box>
         </HStack>
         <Text color="whiteAlpha.700">

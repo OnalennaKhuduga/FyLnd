@@ -12,11 +12,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa";
-import { FaCirclePlus } from "react-icons/fa6";
 import YouTube from "react-youtube";
 import CriticScore from "../../components/CriticScore";
 import MetadataList from "../../components/MetadataList";
 import MovieDetailCard from "../../components/MovieDetailCard";
+import WatchlistButton from "../../components/WatchlistButton";
 import useMovieVideos from "../../hooks/useMovieVideo";
 import useShowTrailer from "../../hooks/useShowTrailer";
 import { Movie, MovieDetails } from "../../types/movie";
@@ -107,17 +107,11 @@ const MovieDetailDesktop = ({ movieId, movie, similarMovies }: Props) => {
                 </HStack>
                 {/* Overview */}
                 <Text color="#cac9c9">{overview}</Text>
-                <HStack>
+                <HStack w="50%">
                   <Button variant="solid" fontSize="xl">
                     <Icon as={FaPlay} />
                   </Button>
-                  <Button
-                    variant="ghost"
-                    fontSize="xl"
-                    leftIcon={<Icon as={FaCirclePlus} />}
-                  >
-                    Add to WatchList
-                  </Button>
+                  <WatchlistButton movie={movie} />
                 </HStack>
               </VStack>
             </VStack>

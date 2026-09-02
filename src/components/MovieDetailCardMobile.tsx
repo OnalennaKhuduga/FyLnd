@@ -5,6 +5,7 @@ import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
 import MovieImage from "./MovieImage";
 import MoviePlaceholder from "./MoviePlaceholder";
+import WatchlistButton from "./WatchlistButton";
 
 interface Props {
   movie: MovieBase;
@@ -28,6 +29,9 @@ const MovieDetailCardMobile = ({ movie }: Props) => {
           <CriticScore score={parseInt(movie.vote_average.toFixed(1))} />
         </Heading>
         <Text color="whiteAlpha.600">{movie.release_date}</Text>
+        <Box padding={0}>
+          <WatchlistButton movie={movie} variant="icon" />
+        </Box>
       </VStack>
     </Flex>
   );

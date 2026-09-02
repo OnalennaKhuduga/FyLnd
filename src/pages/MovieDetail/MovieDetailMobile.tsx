@@ -15,6 +15,7 @@ import MetadataList from "../../components/MetadataList";
 import MovieDetailCardMobile from "../../components/MovieDetailCardMobile";
 import MovieImage from "../../components/MovieImage";
 import MoviePlaceholder from "../../components/MoviePlaceholder";
+import WatchlistButton from "../../components/WatchlistButton";
 import useMovieVideos from "../../hooks/useMovieVideo";
 import useShowTrailer from "../../hooks/useShowTrailer";
 import { Movie, MovieDetails } from "../../types/movie";
@@ -96,9 +97,7 @@ const MovieDetailMobile = ({ movieId, movie, similarMovies }: Props) => {
             <Button colorScheme="blue" w="inherit">
               Watch Now
             </Button>
-            <Button variant="solid" w="inherit">
-              Add to WatchList
-            </Button>
+            <WatchlistButton movie={movie} />
           </VStack>
 
           <Text>{overview}</Text>

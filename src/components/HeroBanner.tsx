@@ -22,6 +22,7 @@ import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
 import HeroBannerSkeleton from "./HeroBannerSkeleton";
 import MetadataList from "./MetadataList";
+import WatchlistButton from "./WatchlistButton";
 
 const HeroBanner = () => {
   const topRatedEndpoint = getMovieEndpoint("top_rated");
@@ -185,13 +186,13 @@ const HeroBanner = () => {
                   {summarizedOverview}
                 </Text>
               </Show>
-              <HStack>
-                <Button size="sm" colorScheme="red" variant="outline">
+              <HStack fontSize="sm">
+                <Button colorScheme="blue" variant="outline">
                   More Info
                 </Button>
-                <Button size="sm" colorScheme="blue" variant="outline">
-                  Add to WatchList
-                </Button>
+                <Box>
+                  <WatchlistButton movie={currentMovie[currentMovieIndex]} />
+                </Box>
               </HStack>
             </VStack>
           </VStack>

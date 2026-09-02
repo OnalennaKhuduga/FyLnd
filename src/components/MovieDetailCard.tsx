@@ -4,6 +4,7 @@ import { MovieBase } from "../types/movie";
 import getImage from "../utils/getImage";
 import MovieImage from "./MovieImage";
 import MoviePlaceholder from "./MoviePlaceholder";
+import WatchlistButton from "./WatchlistButton";
 
 interface Props {
   movie: MovieBase;
@@ -28,6 +29,10 @@ const MovieDetailCard = ({ movie }: Props) => {
           src={movie.backdrop_path ? getImage(movie.backdrop_path) : undefined}
           placeholder={<MoviePlaceholder />}
         />
+
+        <Box position="absolute" top="1" right="1" zIndex="1">
+          <WatchlistButton movie={movie} variant="icon" />
+        </Box>
 
         <Box
           position="absolute"

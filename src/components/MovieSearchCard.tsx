@@ -15,6 +15,7 @@ import getImage from "../utils/getImage";
 import CriticScore from "./CriticScore";
 import MovieImage from "./MovieImage";
 import MoviePlaceholder from "./MoviePlaceholder";
+import WatchlistButton from "./WatchlistButton";
 
 interface Props {
   movie: Movie;
@@ -34,11 +35,21 @@ const MovieSearchCard = ({ movie }: Props) => {
       _hover={{ cursor: "pointer" }}
     >
       {/* backdrop image */}
-      <Box width="25%">
+      <Box width="25%" position="relative">
         <MovieImage
           src={movie.backdrop_path ? getImage(movie.backdrop_path) : undefined}
           placeholder={<MoviePlaceholder />}
         />
+
+        <Box
+          position="absolute"
+          top="1"
+          right="1"
+          borderRadius={5}
+          bgGradient="linear(to-l, blackAlpha.400, blackAlpha.100)"
+        >
+          <WatchlistButton movie={movie} variant="icon" />
+        </Box>
       </Box>
 
       {/* movie metadata */}
