@@ -107,11 +107,13 @@ const MovieDetailDesktop = ({ movieId, movie, similarMovies }: Props) => {
                 </HStack>
                 {/* Overview */}
                 <Text color="#cac9c9">{overview}</Text>
-                <HStack w="50%">
+                <HStack>
                   <Button variant="solid" fontSize="xl">
                     <Icon as={FaPlay} />
                   </Button>
-                  <WatchlistButton movie={movie} />
+                  <Box>
+                    <WatchlistButton movie={movie} />
+                  </Box>
                 </HStack>
               </VStack>
             </VStack>
