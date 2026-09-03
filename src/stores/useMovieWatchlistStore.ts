@@ -7,6 +7,7 @@ interface MovieWatchlistStore {
   addMovie: (movie: MovieBase) => void;
   removeMovie: (id: number) => void;
   isInWatchlist: (id: number) => boolean;
+  clearWatchlist: () => void;
 }
 
 const useMovieWatchlistStore = create<MovieWatchlistStore>()(
@@ -23,6 +24,8 @@ const useMovieWatchlistStore = create<MovieWatchlistStore>()(
         })),
 
       isInWatchlist: (id) => get().watchlist.some((movie) => movie.id === id),
+
+      clearWatchlist: () => set(() => ({ watchlist: [] })),
     }),
     { name: "movie-watchlist" },
   ),
