@@ -35,7 +35,7 @@ const MovieSearchCard = ({ movie }: Props) => {
       _hover={{ cursor: "pointer" }}
     >
       {/* backdrop image */}
-      <Box width="25%" position="relative">
+      <Box width="25%" minH="100px" position="relative">
         <MovieImage
           src={movie.backdrop_path ? getImage(movie.backdrop_path) : undefined}
           placeholder={<MoviePlaceholder />}

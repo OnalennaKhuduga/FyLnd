@@ -14,6 +14,8 @@ import { MovieBase } from "../types/movie";
 import getImage from "../utils/getImage";
 import summarizeText from "../utils/summarizeText";
 import CriticScore from "./CriticScore";
+import MovieImage from "./MovieImage";
+import MoviePlaceholder from "./MoviePlaceholder";
 interface Props {
   movie: MovieBase;
 }
@@ -34,21 +36,35 @@ const MovieWatchlistCard = ({ movie }: Props) => {
         transform: "scale(1.03)",
         transition: "transform 0.15s ease-in-out",
       }}
+      h="100%"
       cursor="pointer"
       onClick={() => navigate(`/movie/${movie.id}`)}
     >
       <Box
         position="relative"
-        h={{ base: "230px", md: "300px" }}
+        h="100%"
         borderRadius={5}
-        bgImage={getImage(movie.poster_path, "w500")}
         bgPosition="center"
         bgRepeat="no-repeat"
         bgSize="cover"
+        minH="250px"
       >
+        {/* Poster Image */}
+        <Box h="100%">
+          <MovieImage
+            src={
+              movie.poster_path
+                ? getImage(movie.poster_path, "w500")
+                : undefined
+            }
+            placeholder={<MoviePlaceholder />}
+          />
+        </Box>
+
         {/* Dark Overlay */}
         <Box
           position="absolute"
+          borderRadius={10}
           bottom="0"
           left="0"
           h="100%"

@@ -6,6 +6,7 @@ import CriticScore from "./CriticScore";
 import MovieImage from "./MovieImage";
 import MoviePlaceholder from "./MoviePlaceholder";
 import WatchlistButton from "./WatchlistButton";
+import noImage from "../assets/no-image.png";
 
 interface Props {
   movie: Movie;
@@ -27,10 +28,12 @@ const MovieGridCard = ({ movie }: Props) => {
       onClick={() => navigate(`/movie/${movie.id}`)}
     >
       <Box flex="3" w="100%" h="100%">
-        <MovieImage
-          src={movie.poster_path ? getImage(movie.poster_path) : undefined}
-          placeholder={<MoviePlaceholder />}
-        />
+        <Box minH="200px" h="100%">
+          <MovieImage
+            src={movie.poster_path ? getImage(movie.poster_path) : undefined}
+            placeholder={<MoviePlaceholder />}
+          />
+        </Box>
       </Box>
 
       <VStack align="flex-start" flex="1" padding={1} spacing={0}>
