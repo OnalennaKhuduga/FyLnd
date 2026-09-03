@@ -47,7 +47,7 @@ const MovieDetailDesktop = ({ movieId, movie, similarMovies }: Props) => {
   ];
 
   return (
-    <Box position="fixed" h="100vh" w="100vw" justifyContent="space-between">
+    <Box position="relative" h="100vh" w="100vw" justifyContent="space-between">
       {/* Background Image */}
       <Box
         position="relative"
