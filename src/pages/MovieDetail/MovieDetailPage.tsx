@@ -1,4 +1,4 @@
-import { Show, Spinner } from "@chakra-ui/react";
+import { Center, Show, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import useMovie from "../../hooks/useMovie";
 import useSimilarMovies from "../../hooks/useSimilarMovies";
@@ -18,7 +18,12 @@ const MovieDetailPage = () => {
   const { data: similarMovies, isLoading: isSimilarMovieLoading } =
     useSimilarMovies(movieId);
 
-  if (isMovieLoading || isSimilarMovieLoading) return <Spinner />;
+  if (isMovieLoading || isSimilarMovieLoading)
+    return (
+      <Center h="100vh">
+        <Spinner />
+      </Center>
+    );
   if (movieError || !data) return null;
 
   return (

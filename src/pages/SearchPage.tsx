@@ -1,4 +1,5 @@
 import {
+  Center,
   Grid,
   GridItem,
   Heading,
@@ -23,7 +24,12 @@ const SearchPage = () => {
 
   const { data, error, isLoading } = useMovies(selectedEndpoint);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <Center h="100%">
+        <Spinner />
+      </Center>
+    );
   if (error) return null;
 
   return (
