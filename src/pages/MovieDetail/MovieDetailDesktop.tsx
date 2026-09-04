@@ -2,12 +2,12 @@ import {
   AspectRatio,
   Badge,
   Box,
-  Button,
   Grid,
   GridItem,
   Heading,
   HStack,
-  Icon,
+  IconButton,
+  Link,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -108,9 +108,17 @@ const MovieDetailDesktop = ({ movieId, movie, similarMovies }: Props) => {
                 {/* Overview */}
                 <Text color="#cac9c9">{overview}</Text>
                 <HStack>
-                  <Button variant="solid" fontSize="xl">
-                    <Icon as={FaPlay} />
-                  </Button>
+                  <Link
+                    href={movie.homepage}
+                    isExternal
+                    _hover={{ textDecoration: "none" }}
+                  >
+                    <IconButton
+                      aria-label="Visit movie website"
+                      fontSize="lg"
+                      icon={<FaPlay />}
+                    />
+                  </Link>
                   <Box>
                     <WatchlistButton movie={movie} />
                   </Box>

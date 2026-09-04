@@ -94,7 +94,13 @@ const MovieDetailMobile = ({ movieId, movie, similarMovies }: Props) => {
           </HStack>
 
           <VStack w="100%" gap={1}>
-            <Button colorScheme="blue" w="inherit">
+            <Button
+              as="a"
+              href={movie.homepage}
+              target="_blank"
+              colorScheme="blue"
+              w="inherit"
+            >
               Watch Now
             </Button>
             <WatchlistButton movie={movie} />
